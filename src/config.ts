@@ -8,7 +8,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "tanaka.",
+	title: "tanakaisworking",
 	subtitle: "つくること、考えること。",
 	lang: "ja",
 	themeColor: {
@@ -47,7 +47,7 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.png",
-	name: "田中 貴士",
+	name: "tanakaisworking",
 	bio: "AIとプロダクトをつくる。ヒバチ株式会社代表。",
 	links: [
 		{
