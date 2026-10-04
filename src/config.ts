@@ -9,7 +9,7 @@ export const siteConfig: SiteConfig = {
   title: 'tanaka.',
   subtitle: 'つくること、考えること。',
   lang: 'ja',
-  themeColor: { hue: 155, fixed: false },
+  themeColor: { hue: 235, fixed: false },
   banner: {
     enable: false,
     src: 'assets/images/avatar.png',
