@@ -1,6 +1,6 @@
-# 田中 貴士
+# tanakaisworking
 
-**Takashi Tanaka / @tanakaisworking**
+**@tanakaisworking**
 
 AIとソフトウェアを使って、日々の仕事で役立つプロダクトをつくっています。ヒバチ株式会社の代表です。
 
