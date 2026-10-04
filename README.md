@@ -1,4 +1,4 @@
-# tanaka. — 田中貴士の個人サイト
+# tanakaisworking — 個人サイト
 
 公開URL: **https://tanakaisworking.github.io/**
 
@@ -8,7 +8,7 @@
 
 - サイト名、プロフィール、SNSリンク
 - テーマカラー: hue **235**
-- 田中貴士のプロフィール本文
+- tanakaisworking のプロフィール本文
 - 記事コンテンツ
 - GitHubプロフィール画像
 - 公開先URL
