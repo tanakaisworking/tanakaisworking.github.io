@@ -10,15 +10,21 @@ AIとソフトウェアを使って、日々の仕事で役立つプロダクト
 
 現在は、会議の文字起こし・議事録アプリ「Reki note」を中心に、ローカルAI、MCP、AIエージェント周辺のプロダクトや小さなOSSをつくっています。
 
-## 作っているもの
+## 完成品
 
 - [Reki note](https://rekinote.app/ja/lp/business/) — 会話を文字起こし・議事録として蓄積し、あとから検索・参照できるデスクトップアプリ
+- [Japanese UX Writing Skill](https://github.com/tanakaisworking/japanese-ux-writing-skill) — 日本語SaaSのUIテキストをAIに書かせるためのUXライティングスキル
+- [Secret Manager（スキル）](https://github.com/tanakaisworking/secret-manager) — AIコーディングエージェントに秘密情報そのものを見せず、名前だけで利用させるためのローカルスキル
+
+## 試作
+
 - [mikan chat](https://github.com/tanakaisworking/mikan-chat) — シナリオの中でAIキャラクターと会話する、無料・OSSのローカルAIチャット
 - [Dot Taskboard](https://github.com/tanakaisworking/dot-taskboard) — タスクと「次の一手」を扱う、MCP対応の個人向けタスクワークスペース
-- [readapp](https://github.com/tanakaisworking/readapp) — PC通知をローカルAIでキャラ口調に変換し、好きな声で読み上げる常駐アプリを設計・開発中
-- [Secret Manager](https://github.com/tanakaisworking/secret-manager) — AIコーディングエージェントに秘密情報そのものを見せず、名前だけで利用させるローカルワークフロー
+- [readapp](https://github.com/tanakaisworking/readapp) — PC通知をローカルAIでキャラ口調に変換し、好きな声で読み上げる常駐アプリ
+- [Parallel Insight](https://github.com/tanakaisworking/parallel-insight-lp) — CSVから施策効果を見る分析プロダクトの実験
+- [Miftah 日本語版](https://github.com/tanakaisworking/miftah-ja) — 複数アカウントのMCP接続を扱うMiftahの日本向けfork
 
-そのほかの小さなツールや実験は、[公開しているものの記事](/posts/oss-projects/)と[GitHub](https://github.com/tanakaisworking)にまとめています。
+そのほかの小さなツールや実験は、[作っているもの・公開しているもの](/posts/oss-projects/)と[GitHub](https://github.com/tanakaisworking)にまとめています。
 
 ## このサイトについて
 
