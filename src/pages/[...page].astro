@@ -1,23 +1,31 @@
 ---
-import type { GetStaticPaths } from "astro";
-import Pagination from "../components/control/Pagination.astro";
-import PostPage from "../components/PostPage.astro";
-import { PAGE_SIZE } from "../constants/constants";
-import MainGridLayout from "../layouts/MainGridLayout.astro";
-import { getSortedPosts } from "../utils/content-utils";
+import type { GetStaticPaths } from 'astro';
+import Pagination from '../components/control/Pagination.astro';
+import PostPage from '../components/PostPage.astro';
+import HomeIntro from '../components/HomeIntro.astro';
+import ProjectCards from '../components/ProjectCards.astro';
+import { PAGE_SIZE } from '../constants/constants';
+import MainGridLayout from '../layouts/MainGridLayout.astro';
+import { getSortedPosts } from '../utils/content-utils';
+import { url } from '../utils/url-utils';
 
 export const getStaticPaths = (async ({ paginate }) => {
-	const allBlogPosts = await getSortedPosts();
-	return paginate(allBlogPosts, { pageSize: PAGE_SIZE });
+  const posts = await getSortedPosts();
+  return paginate(posts, { pageSize: PAGE_SIZE });
 }) satisfies GetStaticPaths;
-// https://github.com/withastro/astro/issues/6507#issuecomment-1489916992
-
 const { page } = Astro.props;
-
-const len = page.data.length;
 ---
-
-<MainGridLayout>
-    <PostPage page={page}></PostPage>
-    <Pagination class="mx-auto onload-animation" page={page} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+<MainGridLayout title={page.currentPage > 1 ? `記事一覧 ${page.currentPage}` : undefined}>
+  {page.currentPage === 1 && <>
+    <HomeIntro />
+    <section class="home-projects" aria-labelledby="projects-heading">
+      <div class="personal-section-heading"><h2 id="projects-heading">取り組んでいること</h2><a href={url('/projects/')} class="personal-text-link">詳しく見る <span aria-hidden="true">→</span></a></div>
+      <ProjectCards compact />
+    </section>
+  </>}
+  <section aria-labelledby="posts-heading">
+    <div class="personal-section-heading"><h2 id="posts-heading">{page.currentPage === 1 ? '最近の記事' : '記事一覧'}</h2><a href={url('/archive/')} class="personal-text-link">すべての記事 <span aria-hidden="true">→</span></a></div>
+    <PostPage page={page} />
+    <Pagination class="mx-auto" page={page} />
+  </section>
 </MainGridLayout>

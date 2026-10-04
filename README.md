@@ -1,99 +1,108 @@
-# 🍥Fuwari  
-![Node.js >= 20](https://img.shields.io/badge/node.js-%3E%3D20-brightgreen) 
-![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue) 
-[![DeepWiki](https://img.shields.io/badge/DeepWiki-saicaca%2Ffuwari-blue.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAyCAYAAAAnWDnqAAAAAXNSR0IArs4c6QAAA05JREFUaEPtmUtyEzEQhtWTQyQLHNak2AB7ZnyXZMEjXMGeK/AIi+QuHrMnbChYY7MIh8g01fJoopFb0uhhEqqcbWTp06/uv1saEDv4O3n3dV60RfP947Mm9/SQc0ICFQgzfc4CYZoTPAswgSJCCUJUnAAoRHOAUOcATwbmVLWdGoH//PB8mnKqScAhsD0kYP3j/Yt5LPQe2KvcXmGvRHcDnpxfL2zOYJ1mFwrryWTz0advv1Ut4CJgf5uhDuDj5eUcAUoahrdY/56ebRWeraTjMt/00Sh3UDtjgHtQNHwcRGOC98BJEAEymycmYcWwOprTgcB6VZ5JK5TAJ+fXGLBm3FDAmn6oPPjR4rKCAoJCal2eAiQp2x0vxTPB3ALO2CRkwmDy5WohzBDwSEFKRwPbknEggCPB/imwrycgxX2NzoMCHhPkDwqYMr9tRcP5qNrMZHkVnOjRMWwLCcr8ohBVb1OMjxLwGCvjTikrsBOiA6fNyCrm8V1rP93iVPpwaE+gO0SsWmPiXB+jikdf6SizrT5qKasx5j8ABbHpFTx+vFXp9EnYQmLx02h1QTTrl6eDqxLnGjporxl3NL3agEvXdT0WmEost648sQOYAeJS9Q7bfUVoMGnjo4AZdUMQku50McDcMWcBPvr0SzbTAFDfvJqwLzgxwATnCgnp4wDl6Aa+Ax283gghmj+vj7feE2KBBRMW3FzOpLOADl0Isb5587h/U4gGvkt5v60Z1VLG8BhYjbzRwyQZemwAd6cCR5/XFWLYZRIMpX39AR0tjaGGiGzLVyhse5C9RKC6ai42ppWPKiBagOvaYk8lO7DajerabOZP46Lby5wKjw1HCRx7p9sVMOWGzb/vA1hwiWc6jm3MvQDTogQkiqIhJV0nBQBTU+3okKCFDy9WwferkHjtxib7t3xIUQtHxnIwtx4mpg26/HfwVNVDb4oI9RHmx5WGelRVlrtiw43zboCLaxv46AZeB3IlTkwouebTr1y2NjSpHz68WNFjHvupy3q8TFn3Hos2IAk4Ju5dCo8B3wP7VPr/FGaKiG+T+v+TQqIrOqMTL1VdWV1DdmcbO8KXBz6esmYWYKPwDL5b5FA1a0hwapHiom0r/cKaoqr+27/XcrS5UwSMbQAAAABJRU5ErkJggg==)](https://deepwiki.com/saicaca/fuwari)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari.svg?type=shield&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari?ref=badge_shield&issueType=license)
+# tanaka. — 田中貴士の個人サイト
 
-A static blog template built with [Astro](https://astro.build).
+[Fuwari](https://github.com/saicaca/fuwari)をベースにした、日本語の個人サイトです。Astroの静的出力なので、データベース・APIキー・常駐サーバーは不要です。
 
-[**🖥️ Live Demo (Vercel)**](https://fuwari.vercel.app)
+トップ、取り組み、プロフィール、アーカイブ、記事詳細、検索、RSS、サイトマップ、404を用意しています。Cloudflareへのデプロイはまだ行っていません。
 
-![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
+## プレビュー
 
-🌏 README in
-[**中文**](https://github.com/saicaca/fuwari/blob/main/docs/README.zh-CN.md) /
-[**日本語**](https://github.com/saicaca/fuwari/blob/main/docs/README.ja.md) /
-[**한국어**](https://github.com/saicaca/fuwari/blob/main/docs/README.ko.md) /
-[**Español**](https://github.com/saicaca/fuwari/blob/main/docs/README.es.md) /
-[**ไทย**](https://github.com/saicaca/fuwari/blob/main/docs/README.th.md) /
-[**Tiếng Việt**](https://github.com/saicaca/fuwari/blob/main/docs/README.vi.md) /
-[**Bahasa Indonesia**](https://github.com/saicaca/fuwari/blob/main/docs/README.id.md) (Provided by the community and may not always be up-to-date)
+![デスクトップ表示](docs/preview/desktop.webp)
 
-## ✨ Features
+[スマホ表示](docs/preview/mobile.webp) / [ダークモード](docs/preview/desktop-dark.webp)
 
-- [x] Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com)
-- [x] Smooth animations and page transitions
-- [x] Light / dark mode
-- [x] Customizable theme colors & banner
-- [x] Responsive design
-- [x] Search functionality with [Pagefind](https://pagefind.app/)
-- [x] [Markdown extended features](https://github.com/saicaca/fuwari?tab=readme-ov-file#-markdown-extended-syntax)
-- [x] Table of contents
-- [x] RSS feed
+## Cloudflare Pagesにデプロイ
 
-## 🚀 Getting Started
+Cloudflareの **Workers & Pages → Create application → Pages → Import an existing Git repository** から `tanakaisworking/personal-site` を選択します。非公開リポジトリなので、CloudflareのGitHub連携にこのリポジトリの読み取りを許可してください。
 
-1. Create your blog repository:
-    - [Generate a new repository](https://github.com/saicaca/fuwari/generate) from this template or fork this repository.
-    - Or run one of the following commands:
-       ```sh
-       npm create fuwari@latest
-       yarn create fuwari
-       pnpm create fuwari@latest
-       bun create fuwari@latest
-       deno run -A npm:create-fuwari@latest
-       ```
-2. To edit your blog locally, clone your repository, run `pnpm install` to install dependencies.
-    - Install [pnpm](https://pnpm.io) `npm install -g pnpm` if you haven't.
-3. Edit the config file `src/config.ts` to customize your blog.
-4. Run `pnpm new-post <filename>` to create a new post and edit it in `src/content/posts/`.
-5. Deploy your blog to Vercel, Netlify, GitHub Pages, etc. following [the guides](https://docs.astro.build/en/guides/deploy/). You need to edit the site configuration in `astro.config.mjs` before deployment.
+| 項目 | 設定 |
+| --- | --- |
+| Framework preset | Astro |
+| Production branch | `main` |
+| Build command | `pnpm build` |
+| Build output directory | `dist` |
+| Root directory | 空欄（リポジトリ直下） |
+| Environment variable | `PNPM_VERSION` = `9.14.4` |
+| Environment variable | `SITE_URL` = 実際に公開するURL（例：`https://選んだプロジェクト名.pages.dev`） |
 
-## 📝 Frontmatter of Posts
+Node.jsは `.node-version` の `22.22.1` を利用します。Pagesの設定に別の `NODE_VERSION` がある場合は、削除するか同じ値にしてください。ProductionとPreviewの両方にpnpmバージョンを設定します。
+
+`SITE_URL` はcanonical・OGP・RSS・サイトマップの基準です。独自ドメインを使うときは、そのURLを設定して再デプロイしてください。Previewにも本番の `SITE_URL` を設定すると、プレビューURLを正規URLとして扱わずに済みます。未設定ならCloudflareの `CF_PAGES_URL` を使うため初回ビルドはできますが、固定の本番URLを明示する運用を推奨します。サブディレクトリ設置には対応していません。
+
+**Workers用アダプター、Functions、D1、Wrangler、デプロイトークンは不要です。** Pagesとして作成してください。GitHub Actionsは検証のみを行い、デプロイしません。
+
+公式資料：[AstroのPagesデプロイ](https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/)、[ビルド環境とバージョン指定](https://developers.cloudflare.com/pages/configuration/build-image/)。
+
+## 記事を増やす
+
+GitHubのWeb画面で `src/content/posts/` に `.md` ファイルを追加できます。既存の記事をコピーして、タイトル・日付・本文を変更するだけでも更新できます。Pages連携後は `main` へのコミットで再デプロイされます。
 
 ```yaml
 ---
-title: My First Blog Post
-published: 2023-09-09
-description: This is the first post of my new Astro blog.
-image: ./cover.jpg
-tags: [Foo, Bar]
-category: Front-end
-draft: false
-lang: jp      # Set only if the post's language differs from the site's language in `config.ts`
+title: 記事のタイトル
+published: 2026-10-05
+description: 一覧や検索エンジンに表示する短い説明
+tags: [AI, 開発ログ]
+category: 開発ノート
+draft: true
+lang: ja
 ---
+
+ここからMarkdownの本文。
 ```
 
-## 🧩 Markdown Extended Syntax
+`draft: true` の記事は本番ビルド・RSS・検索に含まれません。公開前に内容を確認し、`false` に変更します。非公開リポジトリでも、`draft: false` の内容はサイトに公開されます。未来の日付を指定するだけでは公開予約になりません。
 
-In addition to Astro's default support for [GitHub Flavored Markdown](https://github.github.com/gfm/), several extra Markdown features are included:
+ローカルでは次のコマンドで下書きを作成できます。slugは半角英数字とハイフンのみです。
 
-- Admonitions ([Preview and Usage](https://fuwari.vercel.app/posts/markdown-extended/#admonitions))
-- GitHub repository cards ([Preview and Usage](https://fuwari.vercel.app/posts/markdown-extended/#github-repository-cards))
-- Enhanced code blocks with Expressive Code ([Preview](https://fuwari.vercel.app/posts/expressive-code/) / [Docs](https://expressive-code.com/))
+```sh
+pnpm new-post first-note "最初の開発メモ"
+```
 
-## ⚡ Commands
+URLは `/posts/first-note/` になります。作成済みのファイルは上書きしません。日付は日本時間で作成します。コードブロック・画像・数式など、Fuwari標準のMarkdown機能も利用できます。画像は記事フォルダ内か `public/` に置けます。
 
-All commands are run from the root of the project, from a terminal:
+## どこを編集するか
 
-| Command                    | Action                                              |
-|:---------------------------|:----------------------------------------------------|
-| `pnpm install`             | Installs dependencies                               |
-| `pnpm dev`                 | Starts local dev server at `localhost:4321`         |
-| `pnpm build`               | Build your production site to `./dist/`             |
-| `pnpm preview`             | Preview your build locally, before deploying        |
-| `pnpm check`               | Run checks for errors in your code                  |
-| `pnpm format`              | Format your code using Biome                        |
-| `pnpm new-post <filename>` | Create a new post                                   |
-| `pnpm astro ...`           | Run CLI commands like `astro add`, `astro check`    |
-| `pnpm astro --help`        | Get help using the Astro CLI                        |
+| 内容 | ファイル |
+| --- | --- |
+| サイト名・プロフィールの短文・SNSリンク・テーマ色 | `src/config.ts` |
+| トップの見出しと紹介文 | `src/components/HomeIntro.astro` |
+| 取り組みの一覧とリンク | `src/data/projects.ts` |
+| プロフィール本文 | `src/content/spec/about.md` |
+| 記事 | `src/content/posts/*.md` |
+| 追加スタイル | `src/styles/personal.css` |
+| 著者画像 | `src/assets/images/avatar.png` |
+| ファビコン | `public/favicon.svg` |
+| SNS共有画像 | `public/og.png`（生成元：`scripts/create-social-image.mjs`） |
 
-## ✏️ Contributing
+記事3本と、非公開の開発ログ雛形を同梱しています。初期の紹介文は編集して使ってください。売上・利用者数・顧客情報・個人の連絡先・未公開ロードマップは掲載していません。
 
-Check out the [Contributing Guide](https://github.com/saicaca/fuwari/blob/main/CONTRIBUTING.md) for details on how to contribute to this project.
+## ローカル開発と確認
 
-## 📄 License
+```sh
+corepack enable
+pnpm install --frozen-lockfile
+pnpm dev
+```
 
-This project is licensed under the MIT License.
+検索は本番ビルド時にPagefindが索引をつくります。検索まで確認する場合は、開発サーバーではなく次を使います。
 
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari.svg?type=large&issueType=license)](https://app.fossa.com/projects/git%2Bgithub.com%2Fsaicaca%2Ffuwari?ref=badge_large&issueType=license)
+```sh
+SITE_URL=https://personal-site.example pnpm check
+SITE_URL=https://personal-site.example pnpm build
+pnpm verify
+pnpm preview --host 127.0.0.1
+```
+
+PowerShellでは `$env:SITE_URL='https://personal-site.example'` を先に実行してから、各コマンドを実行してください。ローカルで環境変数を指定しなければ `http://localhost:4321` が基準になります。`.env.example` は設定項目の見本であり、Astro設定ファイルが `.env` を自動で読む前提にはしていません。
+
+`pnpm check` はAstro/TypeScript検査、`pnpm build` は静的サイトと検索索引生成、`pnpm verify` は生成ページ・ローカルリンク・下書き除外などの検証です。記事を全部消すとトップのページネーションを生成できなくなるため、公開記事は最低1本残してください。
+
+## ライセンス・出典
+
+Fuwari由来のコードはMIT Licenseです。元の `LICENSE` を保持しています。記事・プロフィール・独自画像にCCライセンスを自動適用していません。第三者の名前・ロゴ・画像にはそれぞれの権利があります。詳しくは [UPSTREAM.md](UPSTREAM.md) を参照してください。
+
+## ブラウザでの回帰テスト
+
+ChromiumとPython 3が利用できる環境では `pnpm test:browser` も実行できます。既定のChromiumパスは `/usr/bin/chromium` です。macOSなどでは `CHROME_PATH` にChromeの実行ファイルを指定してください。サイトの稼働や通常のビルドにはPythonもChromiumも不要です。
+
+検証内容は [docs/verification.md](docs/verification.md) を参照してください。

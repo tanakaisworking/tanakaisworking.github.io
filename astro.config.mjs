@@ -24,9 +24,12 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
+import { resolveSiteUrl } from "./scripts/site-url.mjs";
+
 // https://astro.build/config
 export default defineConfig({
-	site: "https://fuwari.vercel.app/",
+	site: resolveSiteUrl(),
+	output: "static",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
@@ -100,7 +103,7 @@ export default defineConfig({
 			}
 		}),
         svelte(),
-		sitemap(),
+		sitemap({ filter: page => !page.endsWith("/404/") && !page.endsWith("/404.html") }),
 	],
 	markdown: {
 		remarkPlugins: [
