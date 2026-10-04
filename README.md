@@ -2,7 +2,7 @@
 
 [Fuwari](https://github.com/saicaca/fuwari)をベースにした、日本語の個人サイトです。Astroの静的出力なので、データベース・APIキー・常駐サーバーは不要です。
 
-トップ、取り組み、プロフィール、アーカイブ、記事詳細、検索、RSS、サイトマップ、404を用意しています。Cloudflareへのデプロイはまだ行っていません。
+トップ、取り組み、プロフィール、アーカイブ、記事詳細、検索、RSS、サイトマップ、404を用意しています。\n\n**公開URL:** https://profile.tanakaisworking.workers.dev
 
 ## プレビュー
 
@@ -22,11 +22,11 @@ Cloudflareの **Workers & Pages → Create application → Pages → Import an e
 | Build output directory | `dist` |
 | Root directory | 空欄（リポジトリ直下） |
 | Environment variable | `PNPM_VERSION` = `9.14.4` |
-| Environment variable | `SITE_URL` = 実際に公開するURL（例：`https://選んだプロジェクト名.pages.dev`） |
+| Environment variable | `SITE_URL` = `https://profile.tanakaisworking.workers.dev` |
 
 Node.jsは `.node-version` の `22.22.1` を利用します。Pagesの設定に別の `NODE_VERSION` がある場合は、削除するか同じ値にしてください。ProductionとPreviewの両方にpnpmバージョンを設定します。
 
-`SITE_URL` はcanonical・OGP・RSS・サイトマップの基準です。独自ドメインを使うときは、そのURLを設定して再デプロイしてください。Previewにも本番の `SITE_URL` を設定すると、プレビューURLを正規URLとして扱わずに済みます。未設定ならCloudflareの `CF_PAGES_URL` を使うため初回ビルドはできますが、固定の本番URLを明示する運用を推奨します。サブディレクトリ設置には対応していません。
+`SITE_URL` はcanonical・OGP・RSS・サイトマップの基準です。このサイトでは `https://profile.tanakaisworking.workers.dev` を設定してください。独自ドメインへ変更するときは、そのURLに差し替えて再デプロイしてください。Previewにも本番の `SITE_URL` を設定すると、プレビューURLを正規URLとして扱わずに済みます。未設定ならCloudflareの `CF_PAGES_URL` を使うため初回ビルドはできますが、固定の本番URLを明示する運用を推奨します。サブディレクトリ設置には対応していません。
 
 **Workers用アダプター、Functions、D1、Wrangler、デプロイトークンは不要です。** Pagesとして作成してください。GitHub Actionsは検証のみを行い、デプロイしません。
 
