@@ -1,5 +1,5 @@
 {
-  "name": "tanaka-personal-site",
+  "name": "fuwari",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -13,10 +13,7 @@
     "new-post": "node scripts/new-post.js",
     "format": "biome format --write ./src",
     "lint": "biome check --write ./src",
-    "preinstall": "npx only-allow pnpm",
-    "verify": "node scripts/verify-build.mjs",
-    "social-image": "node scripts/create-social-image.mjs",
-    "test:browser": "node scripts/browser-smoke.mjs"
+    "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
@@ -72,10 +69,8 @@
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.16.0",
-    "playwright-core": "1.63.0",
     "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2"
   },
-  "packageManager": "pnpm@9.14.4",
-  "private": true
+  "packageManager": "pnpm@9.14.4"
 }

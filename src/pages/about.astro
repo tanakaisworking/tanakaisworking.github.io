@@ -1,13 +1,25 @@
 ---
-import { getEntry, render } from 'astro:content';
-import Markdown from '../components/misc/Markdown.astro';
-import MainGridLayout from '../layouts/MainGridLayout.astro';
-const aboutPost = await getEntry('spec', 'about');
-if (!aboutPost) throw new Error('プロフィールの本文がありません');
-const { Content, headings } = await render(aboutPost);
+
+import { getEntry, render } from "astro:content";
+import Markdown from "@components/misc/Markdown.astro";
+import I18nKey from "../i18n/i18nKey";
+import { i18n } from "../i18n/translation";
+import MainGridLayout from "../layouts/MainGridLayout.astro";
+
+const aboutPost = await getEntry("spec", "about");
+
+if (!aboutPost) {
+	throw new Error("About page content not found");
+}
+
+const { Content } = await render(aboutPost);
 ---
-<MainGridLayout title="プロフィール" description="田中貴士。ヒバチ株式会社代表。AIとプロダクト開発、MCPを使ったツールづくりに取り組んでいます。" headings={headings}>
-  <article class="card-base personal-article" data-pagefind-body>
-    <Markdown class="mt-2"><Content /></Markdown>
-  </article>
+<MainGridLayout title={i18n(I18nKey.about)} description={i18n(I18nKey.about)}>
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
+        <div class="card-base z-10 px-9 py-6 relative w-full ">
+            <Markdown class="mt-2">
+                <Content />
+            </Markdown>
+        </div>
+    </div>
 </MainGridLayout>

@@ -29,10 +29,3 @@ yarn.lock
 # ide
 .idea
 *.iml
-
-# Local-only credentials, tool state and browser test output
-.env
-.env.*
-!.env.example
-playwright-report/
-test-results/

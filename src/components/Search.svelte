@@ -48,7 +48,7 @@ const setPanelVisibility = (show: boolean, isDesktop: boolean): void => {
 };
 
 const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
-	if (!keyword.trim()) {
+	if (!keyword) {
 		setPanelVisibility(false, isDesktop);
 		result = [];
 		return;
@@ -75,9 +75,8 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 			console.error("Pagefind is not available in production environment.");
 		}
 
-		if (keyword !== (isDesktop ? keywordDesktop : keywordMobile)) return;
 		result = searchResults;
-		setPanelVisibility(Boolean(keyword.trim()), isDesktop);
+		setPanelVisibility(result.length > 0, isDesktop);
 	} catch (error) {
 		console.error("Search error:", error);
 		result = [];
@@ -137,10 +136,6 @@ $: if (initialized && keywordMobile) {
 		await search(keywordMobile, false);
 	})();
 }
-$: if (initialized && !keywordDesktop && !keywordMobile) {
- result = [];
- setPanelVisibility(false, true);
-}
 </script>
 
 <!-- search bar for desktop view -->
@@ -149,14 +144,14 @@ $: if (initialized && !keywordDesktop && !keywordMobile) {
       dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
 ">
     <Icon icon="material-symbols:search" class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-    <input placeholder="{i18n(I18nKey.search)}" aria-label="記事を検索" bind:value={keywordDesktop} on:focus={() => search(keywordDesktop, true)}
+    <input placeholder="{i18n(I18nKey.search)}" bind:value={keywordDesktop} on:focus={() => search(keywordDesktop, true)}
            class="transition-all pl-10 text-sm bg-transparent outline-0
          h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
     >
 </div>
 
 <!-- toggle btn for phone/tablet view -->
-<button on:click={togglePanel} aria-label="検索パネルを開く" id="search-switch"
+<button on:click={togglePanel} aria-label="Search Panel" id="search-switch"
         class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90">
     <Icon icon="material-symbols:search" class="text-[1.25rem]"></Icon>
 </button>
@@ -171,14 +166,13 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
       dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
   ">
         <Icon icon="material-symbols:search" class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-        <input placeholder="{i18n(I18nKey.search)}" aria-label="記事を検索" bind:value={keywordMobile}
+        <input placeholder="Search" bind:value={keywordMobile}
                class="pl-10 absolute inset-0 text-sm bg-transparent outline-0
                focus:w-60 text-black/50 dark:text-white/50"
         >
     </div>
 
     <!-- search results -->
-    {#if isSearching}<p class="text-sm text-50 p-3" role="status">検索しています…</p>{:else if (keywordDesktop || keywordMobile) && result.length === 0}<p class="text-sm text-50 p-3" role="status">一致する記事がありません。</p>{/if}
     {#each result as item}
         <a href={item.url}
            class="transition first-of-type:mt-2 lg:first-of-type:mt-0 group block

@@ -24,12 +24,9 @@ import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
-import { resolveSiteUrl } from "./scripts/site-url.mjs";
-
 // https://astro.build/config
 export default defineConfig({
-	site: resolveSiteUrl(),
-	output: "static",
+	site: "https://profile.tanakaisworking.workers.dev/",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
@@ -103,7 +100,7 @@ export default defineConfig({
 			}
 		}),
         svelte(),
-		sitemap({ filter: page => !page.endsWith("/404/") && !page.endsWith("/404.html") }),
+		sitemap(),
 	],
 	markdown: {
 		remarkPlugins: [
