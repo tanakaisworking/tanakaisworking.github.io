@@ -1,6 +1,6 @@
 # tanaka. — 田中貴士の個人サイト
 
-公開URL: **https://profile.tanakaisworking.workers.dev**
+公開URL: **https://tanakaisworking.github.io/**
 
 [Fuwari](https://github.com/saicaca/fuwari) をベースにしています。サイトのUI・ページ構成・検索・記事表示などの実装は、原則としてFuwariのデフォルト構成をそのまま使用しています。
 
@@ -23,15 +23,16 @@
 
 記事は `src/content/posts/`、プロフィール本文は `src/content/spec/about.md` にあります。
 
-## Cloudflareでビルドする場合
+## GitHub Pages
 
-| 項目 | 設定 |
-| --- | --- |
-| Build command | `pnpm build` |
-| Build output directory | `dist` |
-| Production branch | `main` |
+`main` へのpushをトリガーに、GitHub ActionsでAstroをビルドしてGitHub Pagesへ自動デプロイします。
 
-Astroの `site` は `https://profile.tanakaisworking.workers.dev/` に設定済みです。
+- 公開URL: `https://tanakaisworking.github.io/`
+- Workflow: `.github/workflows/deploy-pages.yml`
+- Build command: `pnpm build`
+- Output: `dist`
+
+Astroの `site` も `https://tanakaisworking.github.io/` に設定済みです。
 
 ## ローカル
 
