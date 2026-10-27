@@ -1,0 +1,38 @@
+---
+// izanami.dev の記事カードを参考に：投稿者と日付 → 見出し → アイキャッチにタグを重ねる
+import { person } from "../data/profile";
+import { type Post, jpDate, postUrl } from "../lib/posts";
+import Avatar from "./Avatar.astro";
+
+interface Props {
+	post: Post;
+}
+const { post } = Astro.props;
+const { title, published, image, tags, category } = post.data;
+const isPr = tags.includes("PR案件");
+---
+<a href={postUrl(post.id)} class="card border border-base-content/5 bg-base-200 transition hover:-translate-y-0.5 hover:bg-base-300">
+	<div class="card-body gap-3 p-4">
+		<div class="flex items-center gap-3">
+			<Avatar size={36} />
+			<div class="leading-tight">
+				<p class="text-sm">{person.name}</p>
+				<p class="text-xs text-base-content/60"><time datetime={post.data.published.toISOString()}>{jpDate(published)}</time></p>
+			</div>
+			{isPr && <span class="badge badge-sm badge-warning ms-auto">PR</span>}
+		</div>
+		<h2 class="line-clamp-3 min-h-[4.2em] text-[0.95rem] leading-snug font-bold">{title}</h2>
+		<figure class="relative aspect-[16/10] overflow-hidden rounded-lg bg-base-300">
+			{image ? (
+				<img src={image} alt="" loading="lazy" class="size-full object-cover" />
+			) : (
+				<div class="grid size-full place-items-center bg-gradient-to-br from-base-300 to-base-100 px-4 text-center text-sm text-base-content/60">{category || "記事"}</div>
+			)}
+			<div class="absolute bottom-2 left-2 flex flex-wrap gap-1">
+				{tags.filter((t) => t !== "PR案件").slice(0, 2).map((t) => (
+					<span class="badge badge-sm border-0 bg-base-300/90 text-base-content/90">{t}</span>
+				))}
+			</div>
+		</figure>
+	</div>
+</a>

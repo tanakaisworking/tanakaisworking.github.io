@@ -1,0 +1,33 @@
+---
+// note の記事カード（記事一覧の PostCard と同じ見た目で、リンク先が note）
+import { person } from "../data/profile";
+import type { NoteArticle } from "../lib/note";
+import { slashDate } from "../lib/posts";
+import Avatar from "./Avatar.astro";
+
+interface Props {
+	article: NoteArticle;
+}
+const { article } = Astro.props;
+---
+<a href={article.url} target="_blank" rel="noopener" class="card border border-base-content/5 bg-base-200 transition hover:-translate-y-0.5 hover:bg-base-300">
+	<div class="card-body gap-3 p-4">
+		<div class="flex items-center gap-3">
+			<Avatar size={36} />
+			<div class="leading-tight">
+				<p class="text-sm">{person.name}</p>
+				<p class="text-xs text-base-content/60"><time datetime={article.date}>{slashDate(article.date)}</time></p>
+			</div>
+			<span class="badge badge-sm ms-auto badge-note">note</span>
+		</div>
+		<h2 class="line-clamp-3 min-h-[4.2em] text-[0.95rem] leading-snug font-bold">{article.title}</h2>
+		<figure class="relative aspect-[1.91/1] overflow-hidden rounded-lg bg-base-300">
+			{article.image ? (
+				<img src={article.image} alt="" loading="lazy" class="size-full object-cover" />
+			) : (
+				<div class="grid size-full place-items-center text-sm text-base-content/50">note</div>
+			)}
+			{article.likes >= 20 && <span class="badge badge-sm absolute bottom-2 left-2 border-0 bg-base-300/90">スキ {article.likes}</span>}
+		</figure>
+	</div>
+</a>

@@ -1,0 +1,24 @@
+---
+import PostGrid from "../../../components/PostGrid.astro";
+import TagList from "../../../components/TagList.astro";
+import Base from "../../../layouts/Base.astro";
+import { type Post, getPosts, tagCounts } from "../../../lib/posts";
+
+export async function getStaticPaths() {
+	const posts = await getPosts();
+	return tagCounts(posts).map(([tag]) => ({
+		params: { tag },
+		props: { tag, all: posts, posts: posts.filter((p) => p.data.tags.includes(tag)) },
+	}));
+}
+const { tag, all, posts } = Astro.props as { tag: string; all: Post[]; posts: Post[] };
+---
+<Base title={"「" + tag + "」の記事"} description={"「" + tag + "」のタグがついた記事の一覧です。"}>
+	<main class="mx-auto max-w-6xl px-5 pt-16">
+		<div class="breadcrumbs text-sm text-base-content/60"><ul><li><a href="/">ホーム</a></li><li><a href="/posts/">記事</a></li><li>{tag}</li></ul></div>
+		<h1 class="mt-2 text-3xl font-bold"># {tag}</h1>
+		<p class="mt-3 text-[0.95rem] text-base-content/70">{posts.length}件の記事</p>
+		<div class="mt-6"><TagList tags={tagCounts(all)} current={tag} /></div>
+		<div class="mt-8"><PostGrid posts={posts} /></div>
+	</main>
+</Base>

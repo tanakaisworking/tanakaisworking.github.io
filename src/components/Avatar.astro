@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+import avatar from "../assets/images/avatar.jpg";
+
+interface Props {
+	size: number;
+	class?: string;
+	eager?: boolean;
+}
+const { size, class: cls = "", eager = false } = Astro.props;
+---
+<div class="avatar">
+	<div class={"rounded-full " + cls} style={"width:" + size + "px"}>
+		<Image src={avatar} width={size * 2} height={size * 2} alt="田中貴士のプロフィール画像" loading={eager ? "eager" : "lazy"} />
+	</div>
+</div>

@@ -1,0 +1,37 @@
+---
+import NoteCard from "../../components/NoteCard.astro";
+import PostGrid from "../../components/PostGrid.astro";
+import TagList from "../../components/TagList.astro";
+import Base from "../../layouts/Base.astro";
+import { isNotePicked } from "../../data/profile";
+import { getNote } from "../../lib/note";
+import { getPosts, tagCounts } from "../../lib/posts";
+
+const posts = await getPosts();
+const note = await getNote();
+const picked = note.articles.filter(isNotePicked);
+---
+<Base title="記事" description="田中貴士の記事一覧。プロダクトのこと、旧ブログ「インフラボ」から移した記事など。">
+	<main class="mx-auto max-w-6xl px-5 pt-16">
+		<div class="breadcrumbs text-sm text-base-content/60"><ul><li><a href="/">ホーム</a></li><li>記事</li></ul></div>
+		<h1 class="mt-2 text-3xl font-bold">記事</h1>
+		<p class="mt-3 text-[0.95rem] text-base-content/70">プロダクトのことと、旧ブログ「インフラボ」から選んで移した記事。下に note の記事も並べています。</p>
+		<div class="mt-6"><TagList tags={tagCounts(posts)} /></div>
+		<div class="mt-8"><PostGrid posts={posts} /></div>
+
+		{picked.length > 0 && (
+			<section class="mt-20" aria-labelledby="h-note">
+				<div class="flex flex-wrap items-end justify-between gap-3">
+					<div>
+						<h2 id="h-note" class="text-2xl font-bold">note</h2>
+						<p class="mt-2 text-[0.95rem] text-base-content/70">PdM・UX・生成AIプロダクトの仕事で考えたことから、{picked.length}本を選んでいます。</p>
+					</div>
+					<a href="https://note.com/tanakaisworking" target="_blank" rel="noopener" class="btn btn-sm border-0 bg-base-300">note ですべて見る（{note.articles.length}本）</a>
+				</div>
+				<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+					{picked.map((a) => <NoteCard article={a} />)}
+				</div>
+			</section>
+		)}
+	</main>
+</Base>

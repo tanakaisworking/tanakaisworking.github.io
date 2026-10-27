@@ -1,0 +1,87 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # 2日に1回（朝6時 JST）note の RSS を見て、新しい記事があるときだけ作り直す
+  schedule:
+    - cron: "0 21 */2 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check-note:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.compare.outputs.changed }}
+    steps:
+      - name: Compare note RSS with the live site
+        id: compare
+        run: |
+          latest=$(curl -fsSL https://note.com/tanakaisworking/rss | grep -o '<link>https://note.com/tanakaisworking/n/[^<]*' | head -1 | sed 's/<link>//' || true)
+          live=$(curl -fsSL https://tanakaisworking.github.io/note-latest.txt | tr -d '[:space:]' || true)
+          echo "RSS: $latest"
+          echo "Site: $live"
+          if [ -n "$latest" ] && [ "$latest" != "$live" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: check-note
+    # push・手動実行では必ず、定期実行では新しい記事があるときだけ動く
+    if: always() && (github.event_name != 'schedule' || needs.check-note.outputs.changed == 'true')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+
+      - name: Enable Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.14.4 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check Astro
+        run: pnpm astro check
+
+      - name: Build site
+        run: pnpm build
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    # check-note が飛ばされた push・手動実行でも、ビルドが成功したら公開する
+    if: always() && needs.build.result == 'success'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

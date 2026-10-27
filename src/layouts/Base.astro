@@ -1,0 +1,103 @@
+---
+import "../styles/global.css";
+import Icon from "../components/Icon.astro";
+import { links, person } from "../data/profile";
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	article?: boolean;
+}
+const { title, description = "田中貴士のポートフォリオ。Webメディア、UX・PdM、生成AIプロダクトを経て、いまは自社プロダクトと新規事業をつくっている記録です。", image, article = false } = Astro.props;
+const siteName = "田中 貴士";
+const fullTitle = title ? title + " | " + siteName : siteName + " | プロダクト企画・事業開発";
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = image ? new URL(image, Astro.site).href : undefined;
+const nav = [
+	{ href: "/", label: "ホーム", icon: "home" },
+	{ href: "/posts/", label: "記事", icon: "article" },
+	{ href: "/rss.xml", label: "RSS", icon: "rss" },
+];
+---
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- ライト・ダーク両対応を宣言し、ブラウザの自動ダーク変換を止める -->
+		<meta name="color-scheme" content="light dark" />
+		<!-- 自前のダークモードがあるので、Dark Reader などの拡張に塗り直させない -->
+		<meta name="darkreader-lock" />
+		<script is:inline>
+			// 描画前にテーマを決める（保存した選択 → なければ OS の設定）。
+			// 旧サイト（Fuwari）が "theme" に auto/light/dark を保存していたので、別の名前を使い、想定外の値は無視する
+			(function () {
+				var saved = null;
+				try { saved = localStorage.getItem("site-theme"); } catch (e) {}
+				if (saved !== "tanaka" && saved !== "tanaka-light") saved = null;
+				var dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.setAttribute("data-theme", saved || (dark ? "tanaka" : "tanaka-light"));
+			})();
+		</script>
+		<title>{fullTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:site_name" content={siteName} />
+		<meta property="og:title" content={fullTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:type" content={article ? "article" : "website"} />
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		<meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+		<meta name="theme-color" content="#26292d" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f4f4f2" media="(prefers-color-scheme: light)" />
+		<link rel="icon" href="/favicon/favicon-dark-32.png" sizes="32x32" />
+		<link rel="apple-touch-icon" href="/favicon/favicon-dark-180.png" />
+		<link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+	</head>
+	<body class="min-h-dvh text-base-content">
+		<slot />
+
+		<footer class="footer footer-center gap-4 px-6 pt-16 pb-24 text-base-content/60">
+			<nav class="flex gap-3" aria-label="SNSとリンク">
+				{links.map((l) => (
+					<a href={l.href} target="_blank" rel="noopener" class="btn btn-circle btn-ghost" aria-label={l.name}>
+						<Icon name={l.icon} />
+					</a>
+				))}
+			</nav>
+			<p class="text-sm">© 2026 {person.name}</p>
+		</footer>
+
+		<button type="button" id="theme-toggle" class="btn btn-circle btn-lg fixed right-24 bottom-5 z-40 border-base-content/10 bg-base-300 shadow-xl" aria-label="ライトモードとダークモードを切り替える" title="表示モードを切り替える">
+			<span class="show-in-dark"><Icon name="sun" class="size-6" /></span>
+			<span class="show-in-light"><Icon name="moon" class="size-6" /></span>
+		</button>
+		<script is:inline>
+			document.getElementById("theme-toggle").addEventListener("click", function () {
+				var root = document.documentElement;
+				var next = root.getAttribute("data-theme") === "tanaka" ? "tanaka-light" : "tanaka";
+				root.setAttribute("data-theme", next);
+				try { localStorage.setItem("site-theme", next); } catch (e) {}
+			});
+		</script>
+
+		<div class="dropdown dropdown-top dropdown-end fixed right-5 bottom-5 z-40">
+			<div tabindex="0" role="button" class="btn btn-circle btn-lg border-base-content/10 bg-base-300 shadow-xl" aria-label="メニューを開く">
+				<Icon name="menu" class="size-6" />
+			</div>
+			<ul tabindex="-1" class="dropdown-content menu mb-3 w-48 rounded-box bg-base-300 p-2 shadow-2xl">
+				{nav.map((n) => (
+					<li>
+						<a href={n.href}>
+							<Icon name={n.icon} class="size-4" />
+							{n.label}
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	</body>
+</html>

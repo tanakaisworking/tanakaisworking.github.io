@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tanakaisworking.github.io/sitemap-index.xml

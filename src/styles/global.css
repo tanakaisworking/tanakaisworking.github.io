@@ -1,0 +1,166 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+	themes: false;
+}
+
+/* takayaso.com を参考にした、落ち着いたダークテーマ */
+@plugin "daisyui/theme" {
+	name: "tanaka";
+	default: false;
+	/* OS 設定への追従は Base.astro のスクリプトで行う（ここで true にすると選んだテーマより優先されてしまう） */
+	prefersdark: false;
+	color-scheme: dark;
+	--color-base-100: #26292d;
+	--color-base-200: #1c1e21;
+	--color-base-300: #15171a;
+	--color-base-content: #dfe2e6;
+	--color-primary: #8ab4f8;
+	--color-primary-content: #0d1520;
+	--color-secondary: #f2a7c3;
+	--color-secondary-content: #2a0f1a;
+	--color-accent: #7fd1b9;
+	--color-accent-content: #0c1f19;
+	--color-neutral: #15171a;
+	--color-neutral-content: #dfe2e6;
+	--color-info: #8ab4f8;
+	--color-info-content: #0d1520;
+	--color-success: #7fd1a0;
+	--color-success-content: #0c1f14;
+	--color-warning: #e8c874;
+	--color-warning-content: #2a2108;
+	--color-error: #f08a8a;
+	--color-error-content: #2a0d0d;
+	--radius-selector: 2rem;
+	--radius-field: 2rem;
+	--radius-box: 1rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+/* ライトテーマ（OS がライトのときの初期表示） */
+@plugin "daisyui/theme" {
+	name: "tanaka-light";
+	default: true;
+	prefersdark: false;
+	color-scheme: light;
+	--color-base-100: #f4f4f2;
+	--color-base-200: #ffffff;
+	--color-base-300: #e8e8e5;
+	--color-base-content: #1f2328;
+	--color-primary: #2a64c8;
+	--color-primary-content: #ffffff;
+	--color-secondary: #c2477a;
+	--color-secondary-content: #ffffff;
+	--color-accent: #1f8f74;
+	--color-accent-content: #ffffff;
+	--color-neutral: #e8e8e5;
+	--color-neutral-content: #1f2328;
+	--color-info: #2a64c8;
+	--color-info-content: #ffffff;
+	--color-success: #1f8f55;
+	--color-success-content: #ffffff;
+	--color-warning: #e3b33f;
+	--color-warning-content: #2a2108;
+	--color-error: #c94040;
+	--color-error-content: #ffffff;
+	--radius-selector: 2rem;
+	--radius-field: 2rem;
+	--radius-box: 1rem;
+	--size-selector: 0.25rem;
+	--size-field: 0.25rem;
+	--border: 1px;
+	--depth: 0;
+	--noise: 0;
+}
+
+@theme {
+	--font-sans: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", Meiryo, system-ui, sans-serif;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+	}
+	body {
+		background: linear-gradient(160deg, color-mix(in oklab, var(--color-base-100) 94%, black) 0%, var(--color-base-100) 100%) fixed;
+		line-height: 1.8;
+		letter-spacing: 0.02em;
+		line-break: strict;
+		word-break: auto-phrase;
+		text-wrap: pretty;
+		-webkit-font-smoothing: antialiased;
+	}
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+}
+
+/* daisyUI・typography（utilities 層）より優先させるため、層の外に置く */
+/* トップのログ：daisyUI filter で選んだ種類だけ残す */
+#log:has(#f-career:checked) [data-type]:not([data-type="career"]),
+#log:has(#f-release:checked) [data-type]:not([data-type="release"]),
+#log:has(#f-article:checked) [data-type]:not([data-type="article"]),
+#log:has(#f-appeared:checked) [data-type]:not([data-type="appeared"]) {
+	display: none;
+}
+
+/* 記事本文 */
+.article-body {
+	--tw-prose-body: color-mix(in oklab, var(--color-base-content) 88%, transparent);
+	--tw-prose-headings: var(--color-base-content);
+	--tw-prose-lead: var(--color-base-content);
+	--tw-prose-links: var(--color-primary);
+	--tw-prose-bold: var(--color-base-content);
+	--tw-prose-counters: color-mix(in oklab, var(--color-base-content) 60%, transparent);
+	--tw-prose-bullets: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+	--tw-prose-hr: color-mix(in oklab, var(--color-base-content) 12%, transparent);
+	--tw-prose-quotes: color-mix(in oklab, var(--color-base-content) 80%, transparent);
+	--tw-prose-quote-borders: color-mix(in oklab, var(--color-primary) 50%, transparent);
+	--tw-prose-captions: color-mix(in oklab, var(--color-base-content) 60%, transparent);
+	--tw-prose-code: var(--color-base-content);
+	--tw-prose-th-borders: color-mix(in oklab, var(--color-base-content) 20%, transparent);
+	--tw-prose-td-borders: color-mix(in oklab, var(--color-base-content) 10%, transparent);
+	line-height: 1.95;
+}
+.article-body :where(h2) {
+	padding-bottom: 0.4em;
+	border-bottom: 1px solid var(--tw-prose-hr);
+}
+.article-body :where(img) {
+	border-radius: var(--radius-box);
+}
+.article-body :where(blockquote) {
+	font-style: normal;
+	font-weight: 400;
+}
+.article-body :where(blockquote p)::before,
+.article-body :where(blockquote p)::after {
+	content: none;
+}
+.article-body :where(table) {
+	font-size: 0.9em;
+}
+
+/* note のバッジ：テーマに合わせて文字色の明るさを変える */
+.badge-note {
+	border: 0;
+	background: color-mix(in oklab, #41c9b4 20%, transparent);
+	color: color-mix(in oklab, #1fae98 65%, var(--color-base-content));
+}
+
+/* 表示モード切り替えボタン：今のテーマと逆のアイコンだけ出す */
+html[data-theme="tanaka"] .show-in-light,
+html[data-theme="tanaka-light"] .show-in-dark {
+	display: none;
+}

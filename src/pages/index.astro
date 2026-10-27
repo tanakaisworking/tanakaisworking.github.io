@@ -1,0 +1,195 @@
+---
+import Avatar from "../components/Avatar.astro";
+import Icon from "../components/Icon.astro";
+import { type LogItem, type LogType, aiLinks, contactLabel, contactUrl, links, logPosts, manualLog, noteCuratedAt, noteLogPicks, person, products, stats } from "../data/profile";
+import Base from "../layouts/Base.astro";
+import { getNote } from "../lib/note";
+import { getPosts, isoDate, postUrl, slashDate } from "../lib/posts";
+
+const posts = await getPosts();
+// ログに出すこのサイトの記事は logPosts で指定したものだけ
+const postLog: LogItem[] = posts
+	.filter((p) => logPosts.includes(p.id))
+	.map((p) => ({
+		type: "article",
+		date: isoDate(p.data.published),
+		title: p.data.title,
+		sub: p.data.description,
+		href: postUrl(p.id),
+		image: p.data.image || undefined,
+		badge: p.data.tags.includes("PR案件") ? "PR" : undefined,
+	}));
+
+// note は noteLogPicks の記事と、noteCuratedAt より後の記事だけログに入れる
+const note = await getNote();
+const noteLog: LogItem[] = note.articles
+	.filter((a) => noteLogPicks.includes(a.key) || a.date > noteCuratedAt)
+	.map((a) => ({
+		type: "article",
+		date: a.date,
+		title: a.title,
+		sub: a.likes >= 20 ? "note・スキ " + a.likes : "note",
+		href: a.url,
+		image: a.image,
+		external: true,
+		badge: "note",
+	}));
+
+// 新しい順。年だけの日付はその年の1月の後ろに置く。日付が同じなら書いた順のまま
+const key = (d: string) => (d.length === 4 ? d + "-01-99" : d);
+const log = [...postLog, ...noteLog, ...manualLog.filter((l) => !l.hidden)].sort((a, b) => (key(a.date) < key(b.date) ? 1 : key(a.date) > key(b.date) ? -1 : 0));
+
+// 数字：上段はビジネスの成果、下段は発信の数字（note はビルド時の値）
+const allStats = [
+	...stats,
+	...(note.stats ? [{ value: note.stats.followers + "人", title: "note のフォロワー", desc: note.stats.count + "本・累計" + note.stats.likes.toLocaleString("ja-JP") + "スキ" }] : []),
+];
+
+// takayaso.com にならって 4 種類。表示ラベルは項目ごとに上書きできる
+const labels: Record<LogType, string> = { career: "Joined", release: "Released", article: "Published", appeared: "Appeared" };
+const icons: Record<LogType, string> = { career: "career", release: "product", article: "article", appeared: "mic" };
+const filters: { id: string; type: LogType; label: string }[] = [
+	{ id: "f-career", type: "career", label: "Career" },
+	{ id: "f-release", type: "release", label: "Release" },
+	{ id: "f-article", type: "article", label: "Article" },
+	{ id: "f-appeared", type: "appeared", label: "Appeared" },
+];
+const period = (item: LogItem) => slashDate(item.date) + (item.end ? " ~ " + slashDate(item.end) : "");
+---
+<Base>
+	<main class="mx-auto max-w-3xl px-5">
+		<section class="flex flex-col items-center pt-20 pb-16 text-center">
+			<Avatar size={176} class="shadow-2xl ring-1 ring-base-content/10" eager />
+			<p class="mt-8 text-sm font-bold text-base-content/70">{person.title}</p>
+			<h1 class="mt-1 text-3xl font-bold tracking-wider">{person.name}</h1>
+			<p class="mt-2 text-lg font-semibold text-base-content/70">{person.handle}</p>
+			<p class="mt-6 text-[0.95rem] text-base-content/80">
+				{person.bio.map((line, i) => <>{i > 0 && <br />}{line}</>)}
+			</p>
+			<ul class="mt-9 flex gap-4">
+				{links.filter((l) => l.hero).map((l) => (
+					<li>
+						<a href={l.href} target="_blank" rel="noopener" aria-label={l.name} title={l.name} class="btn btn-circle size-16 border-0 bg-base-300 hover:bg-base-200">
+							<Icon name={l.icon} class="size-6" />
+						</a>
+					</li>
+				))}
+			</ul>
+			<a href={contactUrl} target="_blank" rel="noopener" class="btn mt-9 border-0 bg-base-300 px-6 hover:bg-base-200">
+				<Icon name="calendar" class="size-4" />
+				{contactLabel}
+			</a>
+			<div class="mt-8 flex flex-col items-center gap-3">
+				<p class="flex items-center gap-1.5 text-sm text-base-content/60">
+					<Icon name="sparkle" class="size-4" />
+					AIに田中貴士について調べてもらう
+				</p>
+				<ul class="flex flex-wrap justify-center gap-2">
+					{aiLinks.map((a) => (
+						<li>
+							<a href={a.href} target="_blank" rel="noopener" class="btn btn-sm border-base-content/10 bg-base-200 font-normal hover:bg-base-300">
+								{a.name}
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
+
+		<section aria-labelledby="h-numbers" class="pb-20">
+			<h2 id="h-numbers" class="sr-only">実績の数字</h2>
+			<div class="grid grid-cols-6 gap-3">
+				{allStats.map((s, i) => (
+					<div class:list={["stat place-items-center rounded-box bg-base-200 px-2 py-6 text-center", i < 2 ? "col-span-3" : allStats.length === 5 ? "col-span-2" : "col-span-3"]}>
+						<div class:list={["stat-value text-primary", i < 2 ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"]}>{s.value}</div>
+						<div class="stat-title mt-1 font-bold whitespace-normal text-base-content/80">{s.title}</div>
+						<div class="stat-desc whitespace-normal">{s.desc}</div>
+					</div>
+				))}
+			</div>
+		</section>
+
+		<section aria-labelledby="h-products" class="pb-20">
+			<h2 id="h-products" class="text-center text-3xl font-bold">Products</h2>
+			<div class="mt-10 grid gap-5 sm:grid-cols-2">
+				{products.map((p) => (
+					<a href={p.href} target="_blank" rel="noopener" class="card overflow-hidden bg-base-200 transition hover:bg-base-300">
+						<figure class="aspect-video bg-base-300">
+							{p.image ? (
+								<img src={p.image} alt={p.name} loading="lazy" class="size-full object-cover" />
+							) : (
+								<div class="grid size-full place-items-center bg-gradient-to-br from-base-300 via-base-200 to-base-100 px-6 text-center text-2xl font-bold text-base-content/50">{p.name}</div>
+							)}
+						</figure>
+						<div class="card-body gap-2 p-5">
+							<h3 class="card-title justify-between">
+								{p.name}
+								<Icon name="external" class="size-4 text-base-content/40" />
+							</h3>
+							<p class="text-sm text-base-content/70">{p.desc}</p>
+							<div class="mt-1 flex gap-1.5">{p.badges.map((b) => <span class="badge badge-sm badge-ghost">{b}</span>)}</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</section>
+
+		<section id="log" aria-labelledby="h-log" class="pb-10">
+			<h2 id="h-log" class="text-center text-3xl font-bold">Log</h2>
+			<form class="filter mt-8 justify-center gap-2" aria-label="種類で絞り込む">
+				<input class="btn btn-square btn-sm" type="reset" value="×" aria-label="絞り込みを解除" />
+				{filters.map((f) => <input class="btn btn-sm" type="radio" name="log" id={f.id} aria-label={f.label} />)}
+			</form>
+			<ul class="timeline timeline-vertical timeline-compact timeline-snap-icon mt-10 [&>li]:[--timeline-col-start:0]">
+				{log.map((item) => (
+					<li data-type={item.type}>
+						<hr class="bg-base-content/10" />
+						<div class="timeline-middle">
+							<span class="grid size-11 place-items-center rounded-full bg-base-300 text-base-content/80">
+								<Icon name={icons[item.type]} class="size-5" />
+							</span>
+						</div>
+						<div class="timeline-end mb-10 ms-3 w-full">
+							<p class="flex items-center gap-2 pt-2.5 text-sm text-base-content/60">
+								{item.label ?? labels[item.type]} - <time datetime={item.date}>{period(item)}</time>
+								{item.badge && <span class:list={["badge badge-xs", item.badge === "note" ? "badge-note" : "badge-warning"]}>{item.badge}</span>}
+							</p>
+							{item.href ? (
+								<a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener" : undefined} class="card card-side mt-3 overflow-hidden bg-base-200 transition hover:bg-base-300">
+									<div class="card-body justify-center gap-1 p-5">
+										<h3 class="line-clamp-3 leading-snug font-bold">{item.title}</h3>
+										{item.sub && <p class="line-clamp-2 text-sm text-base-content/60">{item.sub}</p>}
+									</div>
+									{item.image && (
+										<figure class="w-32 shrink-0 sm:w-56">
+											<img src={item.image} alt="" loading="lazy" class="size-full object-cover" />
+										</figure>
+									)}
+								</a>
+							) : (
+								<div class="card card-side mt-3 overflow-hidden bg-base-200">
+									<div class="card-body justify-center gap-1 p-5">
+										<h3 class="leading-snug font-bold">{item.title}</h3>
+										{item.sub && <p class="line-clamp-3 text-sm text-base-content/60">{item.sub}</p>}
+									</div>
+									{item.image && (
+										<figure class="w-32 shrink-0 sm:w-56">
+											<img src={item.image} alt="" loading="lazy" class="size-full object-cover" />
+										</figure>
+									)}
+								</div>
+							)}
+						</div>
+						<hr class="bg-base-content/10" />
+					</li>
+				))}
+			</ul>
+			<div class="mt-4 text-center">
+				<a href="/posts/" class="btn border-0 bg-base-300 hover:bg-base-200">
+					記事をすべて見る
+					<Icon name="arrow" class="size-4" />
+				</a>
+			</div>
+		</section>
+	</main>
+</Base>

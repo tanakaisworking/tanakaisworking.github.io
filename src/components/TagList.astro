@@ -1,0 +1,20 @@
+---
+import { tagUrl } from "../lib/posts";
+
+interface Props {
+	tags: [string, number][];
+	current?: string;
+	limit?: number;
+}
+const { tags: all, current, limit = 12 } = Astro.props;
+// 件数の多い順に上位だけ出す（表示中のタグは必ず含める）
+const tags = all.filter(([t], i) => i < limit || t === current);
+---
+<nav aria-label="タグ" class="flex flex-wrap gap-2">
+	<a href="/posts/" class:list={["badge gap-1.5", current ? "badge-ghost" : "badge-primary"]}>すべて</a>
+	{tags.map(([t, n]) => (
+		<a href={tagUrl(t)} class:list={["badge gap-1.5", t === current ? "badge-primary" : "badge-ghost"]}>
+			{t}<span class="opacity-60">{n}</span>
+		</a>
+	))}
+</nav>
