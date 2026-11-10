@@ -214,13 +214,21 @@ export const manualLog: LogItem[] = [
 	{
 		type: "career",
 		label: "Founded",
-		date: "2025",
+		date: "2025-10-15",
 		end: "現在",
 		title: "ヒバチ株式会社",
 		sub: "代表取締役。自社プロダクトをつくりながら、新規事業の市場調査・事業設計やプロダクト開発を支援",
 		href: "https://hibachi-inc.jp/",
 		image: "/images/log/hibachi.webp",
 		external: true,
+	},
+	{
+		type: "career",
+		label: "Belonged",
+		date: "2025-02-01",
+		end: "2025-12-31",
+		title: "フリーランスコンサルタント",
+		sub: "国内大手企業クライアントに新規事業コンサル、ビジコンのメンターやチーム組成支援",
 	},
 	{
 		type: "release",
