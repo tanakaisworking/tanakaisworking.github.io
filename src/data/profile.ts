@@ -44,7 +44,6 @@ export const aiLinks = [
 export const noteCuratedAt = "2026-10-26";
 export const notePicks = [
 	"n66a472f53f25", // Erabo-2B
-	"nf375ed7344ff", // なぜ2026年に起業して議事録アプリを作るのか
 	"n4dfdd4fdd448", // HR×AI 創業エントリ
 	"n3881278e5d3b", // モックでのユーザー検証をやめた方がいい話
 	"nf873d58cfe62", // 新米PdMの意思決定のつくりかた
@@ -118,11 +117,10 @@ export type LogItem = {
 };
 
 // トップのログに出す、このサイトの記事（旧ブログから）
-export const logPosts = ["spirited-away-phantom-ending", "blog-report-2020-04", "soundpeats-clear-review"];
+export const logPosts = ["soundpeats-clear-review"];
 
 // トップのログに出す note（本人の考えが出ている記事に絞る）。noteCuratedAt より後の記事は自動で入る
 export const noteLogPicks = [
-	"nf375ed7344ff", // なぜ2026年に起業して議事録アプリを作るのか
 	"n4dfdd4fdd448", // HR×AI 創業エントリ
 	"n3881278e5d3b", // モックでのユーザー検証をやめた方がいい話
 	"nbd013ac31b18", // PO・PdMとして退職までに考えたこと
