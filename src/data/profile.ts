@@ -229,6 +229,7 @@ export const manualLog: LogItem[] = [
 		end: "2025-12-31",
 		title: "フリーランスコンサルタント",
 		sub: "国内大手企業クライアントに新規事業コンサル、ビジコンのメンターやチーム組成支援",
+		image: "/images/log/consultant.webp",
 	},
 	{
 		type: "release",
