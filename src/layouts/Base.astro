@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 import Icon from "../components/Icon.astro";
-import { links, person } from "../data/profile";
+import { links } from "../data/profile";
 
 interface Props {
 	title?: string;
@@ -68,7 +68,6 @@ const nav = [
 					</a>
 				))}
 			</nav>
-			<p class="text-sm">© 2026 {person.name}</p>
 		</footer>
 
 		<button type="button" id="theme-toggle" class="btn btn-circle btn-lg fixed right-24 bottom-5 z-40 border-base-content/10 bg-base-300 shadow-xl" aria-label="ライトモードとダークモードを切り替える" title="表示モードを切り替える">

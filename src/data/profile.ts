@@ -11,12 +11,11 @@ export const person = {
 	],
 };
 
-export type LinkIcon = "x" | "note" | "github" | "youtube" | "globe" | "instagram" | "facebook" | "card";
+export type LinkIcon = "x" | "note" | "github" | "globe" | "instagram" | "facebook" | "card";
 // hero: true はトップの丸ボタンにも出す。それ以外はフッターだけ
 export const links: { name: string; href: string; icon: LinkIcon; hero?: boolean }[] = [
 	{ name: "X", href: "https://x.com/tanakaisworking", icon: "x", hero: true },
 	{ name: "note", href: "https://note.com/tanakaisworking", icon: "note", hero: true },
-	{ name: "YouTube", href: "https://www.youtube.com/@fly5948", icon: "youtube", hero: true },
 	{ name: "GitHub", href: "https://github.com/tanakaisworking", icon: "github", hero: true },
 	{ name: "ヒバチ株式会社", href: "https://hibachi-inc.jp/", icon: "globe", hero: true },
 	{ name: "Instagram", href: "https://instagram.com/0908tnk", icon: "instagram" },
@@ -62,11 +61,10 @@ export const notePicks = [
 ];
 export const isNotePicked = (a: { key: string; date: string }) => notePicks.includes(a.key) || a.date > noteCuratedAt;
 
-// 実績の数字。公開済みの値を優先（動画は 2026-10-26 に YouTube で確認）
+// 実績の数字。公開済みの値を優先
 export const stats = [
 	{ value: "2億円+", title: "年間の外注費削減", desc: "生成AIプロダクト Aipen（PO/PdM）" },
 	{ value: "1.6万時間", title: "年間の業務削減", desc: "営業向けCRMの改善企画" },
-	{ value: "530万+", title: "動画の累計再生回数", desc: "同じ企画の2本の合計" },
 	{ value: "月2万PV", title: "個人メディア", desc: "約3か月でグロース" },
 ];
 
@@ -229,14 +227,5 @@ export const manualLog: LogItem[] = [
 		title: "大学に入学",
 		sub: "在学中からWebメディアのSEO・企業サイト制作・RPAの実務に携わる",
 		image: "/images/log/university.webp",
-	},
-	{
-		type: "release",
-		date: "2017-01-25",
-		title: "千と千尋の神隠し 幻のエンディング（Minecraft 再現）",
-		sub: "4,022,462 回再生・高評価 29,009",
-		href: "https://www.youtube.com/watch?v=YkRXOxEuICI",
-		image: "/images/videos/YkRXOxEuICI.webp",
-		external: true,
 	},
 ];
