@@ -160,7 +160,7 @@ export const manualLog: LogItem[] = [
 		type: "release",
 		date: "2026-10-19",
 		title: "Erabo-2B",
-		sub: "業務の判断を「任せてよいか・人に確認すべきか」まで返す日本語の判断モデル。42回の実験から選び、不要な確認を160問中101→29に減らした",
+		sub: "日本語の業務系に特化したAI判断モデルをファインチューニングし公開",
 		href: "https://huggingface.co/tanakaisworking/Erabo-2B",
 		image: "/images/products/erabo-2b.webp",
 		external: true,
