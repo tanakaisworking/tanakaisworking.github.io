@@ -90,10 +90,19 @@ export const products = [
 		image: "/images/products/erabo-2b.webp",
 		badges: ["Hugging Face", "OSS"],
 	},
+];
+
+export const skills = [
 	{
 		name: "Japanese UX Writing Skill",
 		desc: "日本語SaaSのUIテキストをAIに書かせるための、UXライティングのスキル",
 		href: "https://github.com/tanakaisworking/japanese-ux-writing-skill",
+		badges: ["OSS"],
+	},
+	{
+		name: "Secret Manager",
+		desc: "AIコーディングエージェントに値を見せずに、名前だけでAPIキーなどのシークレットを使わせるためのスキル",
+		href: "https://github.com/tanakaisworking/secret-manager",
 		badges: ["OSS"],
 	},
 ];

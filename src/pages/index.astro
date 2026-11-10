@@ -1,7 +1,7 @@
 ---
 import Avatar from "../components/Avatar.astro";
 import Icon from "../components/Icon.astro";
-import { type LogItem, type LogType, aiLinks, contactLabel, contactUrl, links, logPosts, manualLog, noteCuratedAt, noteLogPicks, person, products } from "../data/profile";
+import { type LogItem, type LogType, aiLinks, contactLabel, contactUrl, links, logPosts, manualLog, noteCuratedAt, noteLogPicks, person, products, skills } from "../data/profile";
 import Base from "../layouts/Base.astro";
 import { getNote } from "../lib/note";
 import { getPosts, isoDate, postUrl, slashDate } from "../lib/posts";
@@ -48,6 +48,12 @@ const filters: { id: string; type: LogType; label: string }[] = [
 	{ id: "f-article", type: "article", label: "Article" },
 	{ id: "f-appeared", type: "appeared", label: "Appeared" },
 ];
+// 作ったもの（Products）と、AIに渡すスキル（Skills）は分けて出す
+type Card = { name: string; desc: string; href: string; badges: string[]; image?: string };
+const groups: { id: string; title: string; items: Card[] }[] = [
+	{ id: "products", title: "Products", items: products },
+	{ id: "skills", title: "Skills", items: skills },
+];
 const period = (item: LogItem) => slashDate(item.date) + (item.end ? " ~ " + slashDate(item.end) : "");
 ---
 <Base>
@@ -90,30 +96,32 @@ const period = (item: LogItem) => slashDate(item.date) + (item.end ? " ~ " + sla
 			</div>
 		</section>
 
-		<section aria-labelledby="h-products" class="pb-20">
-			<h2 id="h-products" class="text-center text-3xl font-bold">Products</h2>
-			<div class="mt-10 grid gap-5 sm:grid-cols-2">
-				{products.map((p) => (
-					<a href={p.href} target="_blank" rel="noopener" class="card overflow-hidden bg-base-200 transition hover:bg-base-300">
-						<figure class="aspect-video bg-base-300">
-							{p.image ? (
-								<img src={p.image} alt={p.name} loading="lazy" class="size-full object-cover" />
-							) : (
-								<div class="grid size-full place-items-center bg-gradient-to-br from-base-300 via-base-200 to-base-100 px-6 text-center text-2xl font-bold text-base-content/50">{p.name}</div>
-							)}
-						</figure>
-						<div class="card-body gap-2 p-5">
-							<h3 class="card-title justify-between">
-								{p.name}
-								<Icon name="external" class="size-4 text-base-content/40" />
-							</h3>
-							<p class="text-sm text-base-content/70">{p.desc}</p>
-							<div class="mt-1 flex gap-1.5">{p.badges.map((b) => <span class="badge badge-sm badge-ghost">{b}</span>)}</div>
-						</div>
-					</a>
-				))}
-			</div>
-		</section>
+		{groups.map((group) => (
+			<section aria-labelledby={"h-" + group.id} class="pb-20">
+				<h2 id={"h-" + group.id} class="text-center text-3xl font-bold">{group.title}</h2>
+				<div class="mt-10 grid gap-5 sm:grid-cols-2">
+					{group.items.map((p) => (
+						<a href={p.href} target="_blank" rel="noopener" class="card overflow-hidden bg-base-200 transition hover:bg-base-300">
+							<figure class="aspect-video bg-base-300">
+								{p.image ? (
+									<img src={p.image} alt={p.name} loading="lazy" class="size-full object-cover" />
+								) : (
+									<div class="grid size-full place-items-center bg-gradient-to-br from-base-300 via-base-200 to-base-100 px-6 text-center text-2xl font-bold text-base-content/50">{p.name}</div>
+								)}
+							</figure>
+							<div class="card-body gap-2 p-5">
+								<h3 class="card-title justify-between">
+									{p.name}
+									<Icon name="external" class="size-4 text-base-content/40" />
+								</h3>
+								<p class="text-sm text-base-content/70">{p.desc}</p>
+								<div class="mt-1 flex gap-1.5">{p.badges.map((b) => <span class="badge badge-sm badge-ghost">{b}</span>)}</div>
+							</div>
+						</a>
+					))}
+				</div>
+			</section>
+		))}
 
 		<section id="log" aria-labelledby="h-log" class="pb-10">
 			<h2 id="h-log" class="text-center text-3xl font-bold">Log</h2>

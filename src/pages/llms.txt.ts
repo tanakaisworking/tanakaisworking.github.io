@@ -1,6 +1,6 @@
 // AI エージェント向けの要約（https://llmstxt.org/ の形式）。
 // トップと同じデータから作るので、profile.ts を直せばここも変わる。
-import { contactUrl, isNotePicked, links, manualLog, person, products, stats } from "../data/profile";
+import { contactUrl, isNotePicked, links, manualLog, person, products, skills, stats } from "../data/profile";
 import { getNote } from "../lib/note";
 import { getPosts, postUrl } from "../lib/posts";
 
@@ -31,6 +31,10 @@ export async function GET() {
 		"## つくっているもの",
 		"",
 		...products.map((p) => "- [" + p.name + "](" + p.href + ")：" + p.desc),
+		"",
+		"## スキル",
+		"",
+		...skills.map((p) => "- [" + p.name + "](" + p.href + ")：" + p.desc),
 		"",
 		"## 経歴（新しい順）",
 		"",
