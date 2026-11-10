@@ -15,7 +15,6 @@ const picked = note.articles.filter(isNotePicked);
 	<main class="mx-auto max-w-6xl px-5 pt-16">
 		<div class="breadcrumbs text-sm text-base-content/60"><ul><li><a href="/">ホーム</a></li><li>記事</li></ul></div>
 		<h1 class="mt-2 text-3xl font-bold">記事</h1>
-		<p class="mt-3 text-[0.95rem] text-base-content/70">プロダクトのことと、旧ブログ「インフラボ」から選んで移した記事。下に note の記事も並べています。</p>
 		<div class="mt-6"><TagList tags={tagCounts(posts)} /></div>
 		<div class="mt-8"><PostGrid posts={posts} /></div>
 
