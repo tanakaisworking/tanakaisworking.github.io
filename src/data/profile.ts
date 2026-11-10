@@ -172,7 +172,7 @@ export const manualLog: LogItem[] = [
 	},
 	{
 		type: "appeared",
-		date: "2025-02-28",
+		date: "2024-11-15",
 		title: "年間2億円以上のコスト削減！バイトル原稿作成Copilotで注目される生成AI活用事例「Aipen」チームにインタビュー",
 		sub: "ディップ公式（Wantedly）。PO・PdMとして取材を受けました",
 		href: "https://www.wantedly.com/companies/dip/post_articles/959072",
