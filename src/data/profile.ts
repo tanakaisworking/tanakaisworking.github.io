@@ -223,8 +223,9 @@ export const manualLog: LogItem[] = [
 	{
 		type: "career",
 		date: "2020-04",
-		title: "Web制作会社（水道橋）",
+		title: "水道橋のWeb制作会社（長期インターン）",
 		sub: "企画プランナーとして、Webサイトの開発・リニューアルの提案と資料作成を担当",
+		image: "/images/log/web-agency.webp",
 	},
 	{
 		type: "career",
@@ -246,7 +247,8 @@ export const manualLog: LogItem[] = [
 	{
 		type: "career",
 		date: "2018-05",
-		title: "暗号通貨系Webメディアのベンチャー企業（長期インターン）",
+		title: "暗号通貨系Webベンチャー（長期インターン）",
 		sub: "ビットコインなどの暗号通貨を扱うWebメディアで、FinTech記事を作成",
+		image: "/images/log/crypto-media.webp",
 	},
 ];
