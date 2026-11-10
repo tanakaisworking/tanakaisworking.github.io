@@ -125,6 +125,7 @@ const period = (item: LogItem) => slashDate(item.date) + (item.end ? " ~ " + sla
 
 		<section id="log" aria-labelledby="h-log" class="pb-10">
 			<h2 id="h-log" class="text-center text-3xl font-bold">Log</h2>
+			<p class="mx-auto mt-4 max-w-xl text-center text-[0.95rem] text-base-content/80">中学高校は運動一筋。高校3年でYoutubeがバズり、手に入れた広告収益を仮想通貨にオールイン。大学は1年次から長期インターンを卒業まで継続。社会人を経て起業。</p>
 			<form class="filter mt-8 justify-center gap-2" aria-label="種類で絞り込む">
 				<input class="btn btn-square btn-sm" type="reset" value="×" aria-label="絞り込みを解除" />
 				{filters.map((f) => <input class="btn btn-sm" type="radio" name="log" id={f.id} aria-label={f.label} />)}
@@ -179,7 +180,6 @@ const period = (item: LogItem) => slashDate(item.date) + (item.end ? " ~ " + sla
 					<Icon name="arrow" class="size-4" />
 				</a>
 			</div>
-			<p class="mx-auto mt-16 max-w-xl text-center text-[0.95rem] text-base-content/80">中学高校は運動一筋。高校3年でYoutubeがバズり、手に入れた広告収益を仮想通貨にオールイン。大学は1年次から長期インターンを卒業まで継続。社会人を経て起業。</p>
 		</section>
 	</main>
 </Base>
