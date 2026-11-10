@@ -59,6 +59,26 @@ export const notePicks = [
 	"ndfaee138b6f2", // 営業効率化アプリのプロダクト改善の進め方
 	"na9dbb4cf27b2", // 新卒PdMが社内でUXリサーチを学ぶ過程
 ];
+// 記事一覧の note の絞り込み。ここにない記事は「すべて」だけに出る
+export const noteCategories = ["学びの発信", "考察・思考"] as const;
+export const noteCategoryOf: Record<string, (typeof noteCategories)[number]> = {
+	"n66a472f53f25": "学びの発信", // Erabo-2B
+	"nf873d58cfe62": "学びの発信", // 意思決定のつくりかた
+	"n53a181efe939": "学びの発信", // 生成AI組み込みアプリ開発の知見と反省点
+	"na58fe08597f1": "学びの発信", // 決裁者視点で企画を固める（ROI思考）
+	"nc0ad5a569627": "学びの発信", // 書籍レコメンドサービスのリリース
+	"n6fa81af1a85f": "学びの発信", // 広告コピー × 遺伝的アルゴリズム × ChatGPT
+	"ne2775cac2cb5": "学びの発信", // 仕事で使える初心者Webライティング
+	"nc4a46f921b7d": "学びの発信", // SQL と Looker Studio でインタビュー対象者を観察
+	"ndfaee138b6f2": "学びの発信", // 営業効率化アプリのプロダクト改善の進め方
+	"na9dbb4cf27b2": "学びの発信", // 新卒PdMが社内でUXリサーチを学ぶ過程
+	"n3881278e5d3b": "考察・思考", // モックでのユーザー検証をやめた方がいい話
+	"nfd7af65aefdb": "考察・思考", // プロダクトをパチンコ台と考える KPI
+	"nbd013ac31b18": "考察・思考", // PO・PdMとして退職までに考えたこと
+	"nbd851355f54b": "考察・思考", // プロトタイプ検証したのに使われない機能
+	"nd380fd2630a6": "考察・思考", // 新卒PdMの1年目の振り返り
+	"n29bebc0b7e90": "考察・思考", // 星のカービィとプロダクト開発
+};
 export const isNotePicked = (a: { key: string; date: string }) => notePicks.includes(a.key) || a.date > noteCuratedAt;
 
 // 実績の数字。公開済みの値を優先

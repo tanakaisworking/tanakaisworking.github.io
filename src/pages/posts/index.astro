@@ -3,7 +3,7 @@ import NoteCard from "../../components/NoteCard.astro";
 import PostGrid from "../../components/PostGrid.astro";
 import TagList from "../../components/TagList.astro";
 import Base from "../../layouts/Base.astro";
-import { isNotePicked } from "../../data/profile";
+import { isNotePicked, noteCategories } from "../../data/profile";
 import { getNote } from "../../lib/note";
 import { getPosts, tagCounts } from "../../lib/posts";
 
@@ -20,7 +20,7 @@ const picked = note.articles.filter(isNotePicked);
 		<div class="mt-8"><PostGrid posts={posts} /></div>
 
 		{picked.length > 0 && (
-			<section class="mt-20" aria-labelledby="h-note">
+			<section id="note" class="mt-20" aria-labelledby="h-note">
 				<div class="flex flex-wrap items-end justify-between gap-3">
 					<div>
 						<h2 id="h-note" class="text-2xl font-bold">note</h2>
@@ -28,6 +28,10 @@ const picked = note.articles.filter(isNotePicked);
 					</div>
 					<a href="https://note.com/tanakaisworking" target="_blank" rel="noopener" class="btn btn-sm border-0 bg-base-300">note ですべて見る（{note.articles.length}本）</a>
 				</div>
+				<form class="filter mt-6 gap-2" aria-label="note の記事を絞り込む">
+					<input class="btn btn-square btn-sm" type="reset" value="×" aria-label="絞り込みを解除" />
+					{noteCategories.map((c, i) => <input class="btn btn-sm" type="radio" name="note-cat" id={"nc-" + i} aria-label={c} />)}
+				</form>
 				<div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 					{picked.map((a) => <NoteCard article={a} />)}
 				</div>

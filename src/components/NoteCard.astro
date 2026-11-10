@@ -1,6 +1,6 @@
 ---
 // note の記事カード（記事一覧の PostCard と同じ見た目で、リンク先が note）
-import { person } from "../data/profile";
+import { noteCategoryOf, person } from "../data/profile";
 import type { NoteArticle } from "../lib/note";
 import { slashDate } from "../lib/posts";
 import Avatar from "./Avatar.astro";
@@ -10,7 +10,7 @@ interface Props {
 }
 const { article } = Astro.props;
 ---
-<a href={article.url} target="_blank" rel="noopener" class="card border border-base-content/5 bg-base-200 transition hover:-translate-y-0.5 hover:bg-base-300">
+<a href={article.url} data-cat={noteCategoryOf[article.key]} target="_blank" rel="noopener" class="card border border-base-content/5 bg-base-200 transition hover:-translate-y-0.5 hover:bg-base-300">
 	<div class="card-body gap-3 p-4">
 		<div class="flex items-center gap-3">
 			<Avatar size={36} />

@@ -115,6 +115,12 @@
 	display: none;
 }
 
+/* 記事一覧：note の絞り込み（カテゴリは noteCategories の順） */
+#note:has(#nc-0:checked) [data-cat]:not([data-cat="学びの発信"]),
+#note:has(#nc-1:checked) [data-cat]:not([data-cat="考察・思考"]) {
+	display: none;
+}
+
 /* 記事本文 */
 .article-body {
 	--tw-prose-body: color-mix(in oklab, var(--color-base-content) 88%, transparent);
