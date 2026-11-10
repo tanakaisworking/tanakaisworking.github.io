@@ -1,7 +1,7 @@
 ---
 import Avatar from "../components/Avatar.astro";
 import Icon from "../components/Icon.astro";
-import { type LogItem, type LogType, aiLinks, contactLabel, contactUrl, links, logPosts, manualLog, noteCuratedAt, noteLogPicks, person, products, stats } from "../data/profile";
+import { type LogItem, type LogType, aiLinks, contactLabel, contactUrl, links, logPosts, manualLog, noteCuratedAt, noteLogPicks, person, products } from "../data/profile";
 import Base from "../layouts/Base.astro";
 import { getNote } from "../lib/note";
 import { getPosts, isoDate, postUrl, slashDate } from "../lib/posts";
@@ -38,12 +38,6 @@ const noteLog: LogItem[] = note.articles
 // 新しい順。年だけの日付はその年の1月の後ろに置く。日付が同じなら書いた順のまま
 const key = (d: string) => (d.length === 4 ? d + "-01-99" : d);
 const log = [...postLog, ...noteLog, ...manualLog.filter((l) => !l.hidden)].sort((a, b) => (key(a.date) < key(b.date) ? 1 : key(a.date) > key(b.date) ? -1 : 0));
-
-// 数字：上段はビジネスの成果、下段は発信の数字（note はビルド時の値）
-const allStats = [
-	...stats,
-	...(note.stats ? [{ value: note.stats.followers + "人", title: "note のフォロワー", desc: note.stats.count + "本・累計" + note.stats.likes.toLocaleString("ja-JP") + "スキ" }] : []),
-];
 
 // takayaso.com にならって 4 種類。表示ラベルは項目ごとに上書きできる
 const labels: Record<LogType, string> = { career: "Joined", release: "Released", article: "Published", appeared: "Appeared" };
@@ -93,19 +87,6 @@ const period = (item: LogItem) => slashDate(item.date) + (item.end ? " ~ " + sla
 						</li>
 					))}
 				</ul>
-			</div>
-		</section>
-
-		<section aria-labelledby="h-numbers" class="pb-20">
-			<h2 id="h-numbers" class="sr-only">実績の数字</h2>
-			<div class="grid grid-cols-6 gap-3">
-				{allStats.map((s, i) => (
-					<div class:list={["stat place-items-center rounded-box bg-base-200 px-2 py-6 text-center", i < 2 ? "col-span-3" : allStats.length === 5 ? "col-span-2" : "col-span-3"]}>
-						<div class:list={["stat-value text-primary", i < 2 ? "text-2xl sm:text-4xl" : "text-xl sm:text-3xl"]}>{s.value}</div>
-						<div class="stat-title mt-1 font-bold whitespace-normal text-base-content/80">{s.title}</div>
-						<div class="stat-desc whitespace-normal">{s.desc}</div>
-					</div>
-				))}
 			</div>
 		</section>
 
