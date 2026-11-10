@@ -44,7 +44,6 @@ export const aiLinks = [
 export const noteCuratedAt = "2026-10-26";
 export const notePicks = [
 	"n66a472f53f25", // Erabo-2B
-	"n4dfdd4fdd448", // HR×AI 創業エントリ
 	"n3881278e5d3b", // モックでのユーザー検証をやめた方がいい話
 	"nf873d58cfe62", // 新米PdMの意思決定のつくりかた
 	"nfd7af65aefdb", // プロダクトをパチンコ台と考える KPI
@@ -121,7 +120,6 @@ export const logPosts = ["soundpeats-clear-review"];
 
 // トップのログに出す note（本人の考えが出ている記事に絞る）。noteCuratedAt より後の記事は自動で入る
 export const noteLogPicks = [
-	"n4dfdd4fdd448", // HR×AI 創業エントリ
 	"n3881278e5d3b", // モックでのユーザー検証をやめた方がいい話
 	"nbd013ac31b18", // PO・PdMとして退職までに考えたこと
 	"n53a181efe939", // 生成AI組み込みアプリ開発の知見と反省点
@@ -201,7 +199,7 @@ export const manualLog: LogItem[] = [
 		type: "release",
 		date: "2023-12",
 		title: "ClockClock",
-		sub: "業務委託の稼働を記録する打刻アプリ。企画1週間・開発2週間で個人開発し、いまは利用社数40社以上の自社プロダクトに",
+		sub: "業務委託の稼働を記録する打刻アプリ。累計導入100社超。AI時代以前から会社員をしながら開発・運営",
 		href: "https://clock-clock.biz/",
 		image: "/images/products/clockclock.webp",
 		external: true,
@@ -231,15 +229,6 @@ export const manualLog: LogItem[] = [
 		title: "大学に入学",
 		sub: "在学中からWebメディアのSEO・企業サイト制作・RPAの実務に携わる",
 		image: "/images/log/university.webp",
-	},
-	{
-		type: "release",
-		date: "2017-02-28",
-		title: "千と千尋の神隠し 幻のエンディング（日本語タイトル版）",
-		sub: "1,314,929 回再生・高評価 6,817",
-		href: "https://www.youtube.com/watch?v=gILVEGWQtPQ",
-		image: "/images/videos/gILVEGWQtPQ.webp",
-		external: true,
 	},
 	{
 		type: "release",
